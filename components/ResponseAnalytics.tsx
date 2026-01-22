@@ -93,20 +93,20 @@ export default function ResponseAnalytics({ responses, filter, isSingleView = fa
 
     return textQuestions.map(q => {
       const texts = responses
-        .map(r => r.responses[q.id])
-        .filter(t => typeof t === 'string' && t.trim().length > 0);
+        .map((r: any) => r.responses[q.id])
+        .filter((t: any): t is string => typeof t === 'string' && t.trim().length > 0);
 
       // Simple word frequency (excluding common words)
       const stopWords = new Set(['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'from', 'as', 'is', 'was', 'are', 'were', 'been', 'be', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could', 'should', 'may', 'might', 'must', 'can', 'it', 'its', 'i', 'we', 'they', 'them', 'their', 'my', 'your', 'our']);
 
       const wordFreq: Record<string, number> = {};
-      texts.forEach(text => {
+      texts.forEach((text: string) => {
         const words = text.toLowerCase()
           .replace(/[^\w\s]/g, '')
           .split(/\s+/)
           .filter((w: string) => w.length > 3 && !stopWords.has(w));
 
-        words.forEach(word => {
+        words.forEach((word: string) => {
           wordFreq[word] = (wordFreq[word] || 0) + 1;
         });
       });
