@@ -35,11 +35,6 @@ export default function WordCloud({ words, width = 600, height = 400 }: WordClou
         words={wordData}
         width={width}
         height={height}
-        rotations={2}
-        rotationAngles={[-15, 0]}
-        fontSizes={[12, 48]}
-        padding={2}
-        fontFamily="inherit"
       />
     </div>
   );
