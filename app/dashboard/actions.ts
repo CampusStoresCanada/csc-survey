@@ -356,6 +356,10 @@ export async function sendSurveyInvitations(
       // Generate a unique token for this invitation
       const token = randomBytes(32).toString('hex');
 
+      // Set expiry date (90 days from now)
+      const expiresAt = new Date();
+      expiresAt.setDate(expiresAt.getDate() + 90);
+
       // Create or update invitation record
       const { data: existingInvitation } = await supabase
         .from('survey_invitations')
@@ -371,6 +375,7 @@ export async function sendSurveyInvitations(
           .update({
             token,
             participant_type: participantType,
+            expires_at: expiresAt.toISOString(),
             sent_at: new Date().toISOString()
           })
           .eq('id', existingInvitation.id);
@@ -388,6 +393,7 @@ export async function sendSurveyInvitations(
             email: contact.email,
             participant_type: participantType,
             token,
+            expires_at: expiresAt.toISOString(),
             sent_at: new Date().toISOString()
           });
 
