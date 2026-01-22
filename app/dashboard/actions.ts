@@ -312,9 +312,18 @@ export async function sendSurveyInvitations(
 
   const supabase = getServiceRoleClient();
 
-  // Get the active survey (assuming there's only one survey_id = '1')
-  // TODO: Make this dynamic if you have multiple surveys
-  const surveyId = '1';
+  // Get the active survey
+  const { data: survey, error: surveyError } = await supabase
+    .from('surveys')
+    .select('id')
+    .eq('status', 'active')
+    .single();
+
+  if (surveyError || !survey) {
+    throw new Error('No active survey found');
+  }
+
+  const surveyId = survey.id;
 
   // Fetch contact details
   const { data: contacts, error: contactsError } = await supabase
