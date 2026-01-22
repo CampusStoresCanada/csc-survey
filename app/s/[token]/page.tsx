@@ -4,6 +4,9 @@ import SurveyForm from '@/components/SurveyForm';
 import { conference2026Survey } from '@/lib/survey-config';
 import { submitSurvey, saveProgress } from './actions';
 
+// Force dynamic rendering since we need to fetch data based on URL params
+export const dynamic = 'force-dynamic';
+
 interface PageProps {
   params: Promise<{ token: string }>;
 }
