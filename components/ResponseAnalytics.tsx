@@ -104,7 +104,7 @@ export default function ResponseAnalytics({ responses, filter, isSingleView = fa
         const words = text.toLowerCase()
           .replace(/[^\w\s]/g, '')
           .split(/\s+/)
-          .filter(w => w.length > 3 && !stopWords.has(w));
+          .filter((w: string) => w.length > 3 && !stopWords.has(w));
 
         words.forEach(word => {
           wordFreq[word] = (wordFreq[word] || 0) + 1;
