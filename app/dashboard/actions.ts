@@ -357,7 +357,7 @@ export async function sendSurveyInvitations(
 
       if (existingInvitation) {
         // Update existing invitation with new token
-        await supabase
+        const { error: updateError } = await supabase
           .from('survey_invitations')
           .update({
             token,
@@ -365,9 +365,13 @@ export async function sendSurveyInvitations(
             sent_at: new Date().toISOString()
           })
           .eq('id', existingInvitation.id);
+
+        if (updateError) {
+          throw new Error(`Failed to update invitation: ${updateError.message}`);
+        }
       } else {
         // Create new invitation
-        await supabase
+        const { error: insertError } = await supabase
           .from('survey_invitations')
           .insert({
             survey_id: surveyId,
@@ -377,6 +381,10 @@ export async function sendSurveyInvitations(
             token,
             sent_at: new Date().toISOString()
           });
+
+        if (insertError) {
+          throw new Error(`Failed to create invitation: ${insertError.message}`);
+        }
       }
 
       // Generate survey URL with token
