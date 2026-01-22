@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
+import { createClient } from '@supabase/supabase-js';
 import SurveyForm from '@/components/SurveyForm';
 import { conference2026Survey } from '@/lib/survey-config';
 import { submitSurvey, saveProgress } from './actions';
@@ -13,6 +13,12 @@ interface PageProps {
 
 export default async function SurveyPage({ params }: PageProps) {
   const { token } = await params;
+
+  // Create Supabase client inside the component to avoid build-time instantiation
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
 
   const { data: invitation } = await supabase
     .from('survey_invitations')
