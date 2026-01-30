@@ -147,6 +147,16 @@ export default function SurveyForm({
           </p>
         </div>
 
+        {/* Privacy Notice - Only show on first page */}
+        {isFirstPage && (
+          <div className="mb-8 p-5 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+            <p className="text-sm text-gray-700">
+              <strong>Privacy Notice:</strong> Your responses will be anonymized when aggregated for analysis.
+              However, your progress through this survey is tracked to allow you to save and return to complete it later.
+            </p>
+          </div>
+        )}
+
         {/* Progress bar */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-2">
