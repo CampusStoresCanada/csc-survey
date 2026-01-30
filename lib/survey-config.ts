@@ -57,13 +57,13 @@ export const conference2026Survey: SurveyConfig = {
         {
           id: 'what_worked',
           type: 'textarea',
-          question: 'What actually worked?',
+          question: 'What aspects of the conference were most valuable to you?',
           required: false
         },
         {
           id: 'waste_of_time',
           type: 'textarea',
-          question: 'What felt like a waste of your time?',
+          question: 'What aspects of the conference could be improved or eliminated?',
           required: false
         },
         {
