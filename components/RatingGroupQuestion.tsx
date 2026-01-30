@@ -59,14 +59,14 @@ export default function RatingGroupQuestion({ question, value, onChange }: Ratin
                   type="button"
                   onClick={() => handleRating(item, null)}
                   className={`
-                    flex-1 py-2 px-3 rounded-lg border-2 transition-all font-semibold
+                    flex-1 py-2 px-3 rounded-lg border-2 transition-all font-semibold text-sm
                     ${value[item] === null
                       ? 'border-gray-500 bg-gray-500 text-white shadow-md'
                       : 'border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50 text-gray-700'
                     }
                   `}
                 >
-                  N/A
+                  Didn't attend
                 </button>
               )}
             </div>
