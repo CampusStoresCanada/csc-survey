@@ -388,8 +388,8 @@ Your feedback helps us improve future conferences and better serve our community
                       <span className="text-blue-600">[Survey URL will be included here]</span>
                     </p>
                     <div className="text-xs text-gray-400 text-center mt-8 pt-6 border-t">
-                      <p>This is an automated email from the Canadian Scholastic Company.</p>
-                      <p>If you have any questions, please contact us at info@campusstores.ca</p>
+                      <p>This is an automated email from Campus Stores Canada.</p>
+                      <p>If you have any questions, please contact us at google@campusstores.ca</p>
                     </div>
                   </div>
                 </div>

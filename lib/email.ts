@@ -144,8 +144,8 @@ ${message}
   </div>
 
   <div style="font-size: 12px; color: #999; text-align: center; margin-top: 20px;">
-    <p>This is an automated email from the Canadian Scholastic Company.</p>
-    <p>If you have any questions, please contact us at info@campusstores.ca</p>
+    <p>This is an automated email from Campus Stores Canada.</p>
+    <p>If you have any questions, please contact us at google@campusstores.ca</p>
   </div>
 
 </body>
