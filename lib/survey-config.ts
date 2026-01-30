@@ -67,12 +67,6 @@ export const conference2026Survey: SurveyConfig = {
           required: false
         },
         {
-          id: 'stop_doing',
-          type: 'textarea',
-          question: "What aspects of the conference would you recommend we discontinue?",
-          required: false
-        },
-        {
           id: 'what_was_missing',
           type: 'textarea',
           question: 'What topics, sessions, or services were missing from the conference?',
@@ -202,7 +196,7 @@ export const conference2026Survey: SurveyConfig = {
         {
           id: 'one_thing_change',
           type: 'textarea',
-          question: "If you were planning the 2027 conference, what is one change you would make?",
+          question: "If you were planning the 2027 conference, what changes would you make?",
           required: false
         },
         {
@@ -358,7 +352,7 @@ export const conference2026Survey: SurveyConfig = {
         {
           id: 'one_thing_change',
           type: 'textarea',
-          question: "If you were planning the 2027 conference, what is one change you would make?",
+          question: "If you were planning the 2027 conference, what changes would you make?",
           required: false
         },
         {
