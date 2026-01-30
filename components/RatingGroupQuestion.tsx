@@ -4,8 +4,8 @@ import { Question } from '@/lib/survey-config';
 
 interface RatingGroupQuestionProps {
   question: Question;
-  value: Record<string, number>;
-  onChange: (value: Record<string, number>) => void;
+  value: Record<string, number | null>;
+  onChange: (value: Record<string, number | null>) => void;
 }
 
 export default function RatingGroupQuestion({ question, value, onChange }: RatingGroupQuestionProps) {
@@ -13,8 +13,9 @@ export default function RatingGroupQuestion({ question, value, onChange }: Ratin
   const min = question.options?.min || 1;
   const max = question.options?.max || 5;
   const labels = question.options?.labels || {};
+  const includeNotAttended = question.options?.includeNotAttended || false;
 
-  const handleRating = (item: string, rating: number) => {
+  const handleRating = (item: string, rating: number | null) => {
     onChange({
       ...value,
       [item]: rating
@@ -53,6 +54,21 @@ export default function RatingGroupQuestion({ question, value, onChange }: Ratin
                   </button>
                 );
               })}
+              {includeNotAttended && (
+                <button
+                  type="button"
+                  onClick={() => handleRating(item, null)}
+                  className={`
+                    flex-1 py-2 px-3 rounded-lg border-2 transition-all font-semibold
+                    ${value[item] === null
+                      ? 'border-gray-500 bg-gray-500 text-white shadow-md'
+                      : 'border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50 text-gray-700'
+                    }
+                  `}
+                >
+                  N/A
+                </button>
+              )}
             </div>
           </div>
         ))}

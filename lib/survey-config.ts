@@ -14,6 +14,7 @@ export interface Question {
     max?: number;
     labels?: Record<string, string>;
     items?: string[]; // For rating groups
+    includeNotAttended?: boolean; // For rating groups - adds "I didn't attend" option
   };
 }
 
@@ -182,7 +183,8 @@ export const conference2026Survey: SurveyConfig = {
               '3': 'Good',
               '4': 'Very Good',
               '5': 'Excellent'
-            }
+            },
+            includeNotAttended: true
           }
         },
         {
