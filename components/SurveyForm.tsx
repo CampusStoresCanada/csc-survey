@@ -151,8 +151,9 @@ export default function SurveyForm({
         {isFirstPage && (
           <div className="mb-8 p-5 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
             <p className="text-sm text-gray-700">
-              <strong>Privacy Notice:</strong> Your responses will be anonymized when aggregated for analysis.
-              However, your progress through this survey is tracked to allow you to save and return to complete it later.
+              <strong>Privacy Notice:</strong> This survey is confidential. Your responses are associated with your invitation
+              to allow you to save progress and return later. When reporting results, individual responses will not be attributed
+              to specific participants unless you choose to identify yourself in your written feedback.
             </p>
           </div>
         )}
