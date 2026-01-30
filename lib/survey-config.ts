@@ -69,13 +69,13 @@ export const conference2026Survey: SurveyConfig = {
         {
           id: 'stop_doing',
           type: 'textarea',
-          question: "What's one thing we should stop doing?",
+          question: "What aspects of the conference would you recommend we discontinue?",
           required: false
         },
         {
           id: 'what_was_missing',
           type: 'textarea',
-          question: 'What was missing?',
+          question: 'What topics, sessions, or services were missing from the conference?',
           required: false
         }
       ]
@@ -87,7 +87,7 @@ export const conference2026Survey: SurveyConfig = {
         {
           id: 'venue_rating',
           type: 'scale',
-          question: 'How was the venue?',
+          question: 'How would you rate the venue?',
           required: true,
           options: {
             min: 1,
@@ -110,7 +110,7 @@ export const conference2026Survey: SurveyConfig = {
         {
           id: 'food_rating',
           type: 'scale',
-          question: 'How was the food?',
+          question: 'How would you rate the food?',
           required: true,
           options: {
             min: 1,
@@ -133,7 +133,7 @@ export const conference2026Survey: SurveyConfig = {
         {
           id: 'schedule_rating',
           type: 'scale',
-          question: 'How was the schedule?',
+          question: 'How would you rate the schedule?',
           required: true,
           options: {
             min: 1,
@@ -162,7 +162,7 @@ export const conference2026Survey: SurveyConfig = {
         {
           id: 'sessions_rating',
           type: 'rating_group',
-          question: 'Give us a general sense of how you felt about the sessions you attended:',
+          question: 'Please rate the sessions you attended:',
           required: false,
           options: {
             items: [
@@ -202,13 +202,13 @@ export const conference2026Survey: SurveyConfig = {
         {
           id: 'one_thing_change',
           type: 'textarea',
-          question: "If you were running the 2027 conference, what's ONE thing you would do?",
+          question: "If you were planning the 2027 conference, what is one change you would make?",
           required: false
         },
         {
           id: 'honest_feedback',
           type: 'textarea',
-          question: "This is your chance. Please, tell us honestly what you need us to hear. We read every single one of these, and the feedback you give means a lot. So put it out there. It doesn't have to be perfect. Just write the stream of consciousness stuff we need to know.",
+          question: "Please share any additional feedback or suggestions you have for future conferences:",
           required: false
         }
       ]
@@ -245,7 +245,7 @@ export const conference2026Survey: SurveyConfig = {
         {
           id: 'venue_rating',
           type: 'scale',
-          question: 'How was the venue?',
+          question: 'How would you rate the venue?',
           required: true,
           options: {
             min: 1,
@@ -268,7 +268,7 @@ export const conference2026Survey: SurveyConfig = {
         {
           id: 'food_rating',
           type: 'scale',
-          question: 'How was the food?',
+          question: 'How would you rate the food?',
           required: true,
           options: {
             min: 1,
@@ -291,7 +291,7 @@ export const conference2026Survey: SurveyConfig = {
         {
           id: 'schedule_rating',
           type: 'scale',
-          question: 'How was the schedule?',
+          question: 'How would you rate the schedule?',
           required: true,
           options: {
             min: 1,
@@ -358,13 +358,13 @@ export const conference2026Survey: SurveyConfig = {
         {
           id: 'one_thing_change',
           type: 'textarea',
-          question: "If you were running the 2027 conference, what's ONE thing you would do?",
+          question: "If you were planning the 2027 conference, what is one change you would make?",
           required: false
         },
         {
           id: 'honest_feedback',
           type: 'textarea',
-          question: "This is your chance. Please, tell us honestly what you need us to hear. We read every single one of these, and the feedback you give means a lot. So put it out there. It doesn't have to be perfect. Just write the stream of consciousness stuff we need to know.",
+          question: "Please share any additional feedback or suggestions you have for future conferences:",
           required: false
         }
       ]
