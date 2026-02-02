@@ -345,6 +345,11 @@ export async function sendSurveyInvitations(
     errors: []
   };
 
+  // Helper to add delay between emails to respect rate limits
+  // Resend free tier: 2 emails per second
+  const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+  const RATE_LIMIT_DELAY = 600; // 600ms = ~1.6 emails/sec (safely under 2/sec)
+
   // Process each contact
   for (const contact of contacts) {
     try {
@@ -432,6 +437,11 @@ export async function sendSurveyInvitations(
           error: emailResult.error || 'Unknown error'
         });
         console.error(`❌ Failed to send to ${contact.email}: ${emailResult.error}`);
+      }
+
+      // Add delay to respect rate limits (except after the last email)
+      if (contacts.indexOf(contact) < contacts.length - 1) {
+        await delay(RATE_LIMIT_DELAY);
       }
 
     } catch (error) {
