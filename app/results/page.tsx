@@ -47,14 +47,17 @@ export default async function PublicResultsPage() {
     );
   }
 
-  const formattedResponses = (responses || []).map(r => ({
-    id: r.id,
-    email: r.contacts?.email || 'Anonymous',
-    participant_type: r.participant_type,
-    responded_at: r.completed_at,
-    responses: r.responses,
-    contacts: r.contacts ? { name: r.contacts.name } : null
-  }));
+  const formattedResponses = (responses || []).map(r => {
+    const contact = Array.isArray(r.contacts) ? r.contacts[0] : r.contacts;
+    return {
+      id: r.id,
+      email: contact?.email || 'Anonymous',
+      participant_type: r.participant_type,
+      responded_at: r.completed_at,
+      responses: r.responses,
+      contacts: contact ? { name: contact.name } : null
+    };
+  });
 
   const delegateCount = formattedResponses.filter(r => r.participant_type === 'delegate').length;
   const exhibitorCount = formattedResponses.filter(r => r.participant_type === 'exhibitor').length;
