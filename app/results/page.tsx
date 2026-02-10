@@ -4,10 +4,21 @@ import ResponseAnalytics from '@/components/ResponseAnalytics';
 export const dynamic = 'force-dynamic';
 
 export default async function PublicResultsPage() {
-  // Create Supabase client at runtime to avoid build-time errors
+  // Check environment variables
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    return (
+      <div className="min-h-screen flex items-center justify-center p-4">
+        <div className="text-red-600">
+          Server configuration error: Missing environment variables
+        </div>
+      </div>
+    );
+  }
+
+  // Create Supabase client at runtime (server-side only, env vars are secure)
   const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.SUPABASE_SERVICE_ROLE_KEY
   );
 
   // Fetch all responses
