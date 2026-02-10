@@ -2,7 +2,6 @@
 
 import { useMemo } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
-import WordCloud from './WordCloud';
 
 interface Response {
   id: string;
@@ -218,7 +217,7 @@ export default function ResponseAnalytics({ responses, filter, isSingleView = fa
 
               {metric.allResponses.length > 0 ? (
                 <div>
-                  {/* Show text for single view, word cloud for aggregate view */}
+                  {/* Show text for single view, top themes for aggregate view */}
                   {isSingleView ? (
                     <div className="mt-2">
                       <h4 className="text-sm font-medium text-gray-700 mb-2">Response:</h4>
@@ -228,14 +227,27 @@ export default function ResponseAnalytics({ responses, filter, isSingleView = fa
                     </div>
                   ) : (
                     <>
-                      <h4 className="text-sm font-medium text-gray-700 mb-3">Word Cloud:</h4>
-                      <div className="mb-4 flex justify-center">
-                        <WordCloud words={metric.topWords} width={700} height={450} />
+                      <h4 className="text-sm font-medium text-gray-700 mb-3">Top Themes:</h4>
+                      <div className="mb-4">
+                        {metric.topWords.length > 0 ? (
+                          <div className="grid grid-cols-2 gap-2">
+                            {metric.topWords.slice(0, 12).map(({ word, count }) => (
+                              <div key={word} className="flex justify-between items-center bg-blue-50 border border-blue-200 rounded px-3 py-2">
+                                <span className="text-sm font-semibold text-gray-800 capitalize">{word}</span>
+                                <span className="text-xs font-medium text-blue-600 bg-blue-100 px-2 py-1 rounded-full">
+                                  {count}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <p className="text-sm text-gray-400 italic">No common themes found</p>
+                        )}
                       </div>
 
                       {/* Show sample responses */}
                       <details className="mt-4">
-                        <summary className="text-sm text-blue-600 cursor-pointer hover:text-blue-800">
+                        <summary className="text-sm text-blue-600 cursor-pointer hover:text-blue-800 font-medium">
                           View all responses ({metric.allResponses.length})
                         </summary>
                         <div className="mt-2 space-y-2 max-h-64 overflow-y-auto">
