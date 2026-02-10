@@ -1,10 +1,14 @@
-import { getServiceRoleClient } from '@/lib/supabase';
+import { createClient } from '@supabase/supabase-js';
 import ResponseAnalytics from '@/components/ResponseAnalytics';
 
 export const dynamic = 'force-dynamic';
 
 export default async function PublicResultsPage() {
-  const supabase = getServiceRoleClient();
+  // Create Supabase client at runtime to avoid build-time errors
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
 
   // Fetch all responses
   const { data: responses, error } = await supabase
