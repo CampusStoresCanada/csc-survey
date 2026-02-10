@@ -29,10 +29,28 @@ export default function WordCloud({ words, width = 600, height = 400 }: WordClou
     );
   }
 
+  // Configure word cloud options for better visibility
+  const options = {
+    colors: ['#3b82f6', '#2563eb', '#1d4ed8', '#1e40af', '#1e3a8a', '#10b981', '#059669'],
+    enableTooltip: true,
+    deterministic: true,
+    fontFamily: 'system-ui, -apple-system, sans-serif',
+    fontSizes: [20, 80] as [number, number],
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    padding: 2,
+    rotations: 2,
+    rotationAngles: [0, 0] as [number, number],
+    scale: 'sqrt',
+    spiral: 'archimedean',
+    transitionDuration: 1000,
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow-inner" style={{ width, height }}>
+    <div className="bg-gray-50 rounded-lg border border-gray-200" style={{ width, height }}>
       <ReactWordCloud
         words={wordData}
+        options={options}
         width={width}
         height={height}
       />

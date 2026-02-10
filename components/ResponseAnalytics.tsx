@@ -127,7 +127,7 @@ export default function ResponseAnalytics({ responses, filter, isSingleView = fa
 
       const topWords = Object.entries(wordFreq)
         .sort((a, b) => b[1] - a[1])
-        .slice(0, 15)
+        .slice(0, 25)
         .map(([word, count]) => ({ word, count }));
 
       return {
@@ -219,7 +219,7 @@ export default function ResponseAnalytics({ responses, filter, isSingleView = fa
                     <>
                       <h4 className="text-sm font-medium text-gray-700 mb-3">Word Cloud:</h4>
                       <div className="mb-4">
-                        <WordCloud words={metric.topWords} width={500} height={300} />
+                        <WordCloud words={metric.topWords} width={600} height={400} />
                       </div>
 
                       {/* Show sample responses */}
