@@ -111,7 +111,17 @@ export default function ResponseAnalytics({ responses, filter, isSingleView = fa
         .filter((t: any): t is string => typeof t === 'string' && t.trim().length > 0);
 
       // Simple word frequency (excluding common words)
-      const stopWords = new Set(['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'from', 'as', 'is', 'was', 'are', 'were', 'been', 'be', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could', 'should', 'may', 'might', 'must', 'can', 'it', 'its', 'i', 'we', 'they', 'them', 'their', 'my', 'your', 'our']);
+      const stopWords = new Set([
+        'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'from', 'as',
+        'is', 'was', 'are', 'were', 'been', 'be', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would',
+        'could', 'should', 'may', 'might', 'must', 'can', 'it', 'its', 'i', 'we', 'they', 'them', 'their',
+        'my', 'your', 'our', 'this', 'that', 'these', 'those', 'there', 'here', 'where', 'when', 'what',
+        'which', 'who', 'how', 'why', 'all', 'each', 'every', 'both', 'few', 'more', 'most', 'other', 'some',
+        'such', 'than', 'too', 'very', 'just', 'also', 'being', 'having', 'doing', 'into', 'through', 'during',
+        'before', 'after', 'above', 'below', 'between', 'under', 'again', 'further', 'then', 'once', 'really',
+        'think', 'felt', 'feel', 'make', 'made', 'get', 'got', 'like', 'dont', 'didnt', 'wasnt', 'werent',
+        'wouldnt', 'couldnt', 'shouldnt'
+      ]);
 
       const wordFreq: Record<string, number> = {};
       texts.forEach((text: string) => {
@@ -126,8 +136,9 @@ export default function ResponseAnalytics({ responses, filter, isSingleView = fa
       });
 
       const topWords = Object.entries(wordFreq)
+        .filter(([_, count]) => count >= 2) // Only include words that appear at least twice
         .sort((a, b) => b[1] - a[1])
-        .slice(0, 25)
+        .slice(0, 30)
         .map(([word, count]) => ({ word, count }));
 
       return {
@@ -218,8 +229,8 @@ export default function ResponseAnalytics({ responses, filter, isSingleView = fa
                   ) : (
                     <>
                       <h4 className="text-sm font-medium text-gray-700 mb-3">Word Cloud:</h4>
-                      <div className="mb-4">
-                        <WordCloud words={metric.topWords} width={600} height={400} />
+                      <div className="mb-4 flex justify-center">
+                        <WordCloud words={metric.topWords} width={700} height={450} />
                       </div>
 
                       {/* Show sample responses */}

@@ -31,19 +31,19 @@ export default function WordCloud({ words, width = 600, height = 400 }: WordClou
 
   // Configure word cloud options for better visibility
   const options = {
-    colors: ['#3b82f6', '#2563eb', '#1d4ed8', '#1e40af', '#1e3a8a', '#10b981', '#059669'],
+    colors: ['#1e40af', '#2563eb', '#3b82f6', '#059669', '#10b981', '#0d9488', '#0891b2'],
     enableTooltip: true,
     deterministic: true,
-    fontFamily: 'system-ui, -apple-system, sans-serif',
-    fontSizes: [20, 80] as [number, number],
+    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, sans-serif',
+    fontSizes: [24, 72] as [number, number],
     fontStyle: 'normal',
-    fontWeight: 'bold',
-    padding: 2,
-    rotations: 2,
+    fontWeight: '600',
+    padding: 4,
+    rotations: 1,
     rotationAngles: [0, 0] as [number, number],
-    scale: 'sqrt',
-    spiral: 'archimedean',
-    transitionDuration: 1000,
+    scale: 'linear',
+    spiral: 'rectangular',
+    transitionDuration: 0,
   };
 
   return (
