@@ -55,26 +55,27 @@ export default function ResponseAnalytics({ responses, filter, isSingleView = fa
     });
   }, [responses]);
 
-  // Calculate session ratings
+  // Calculate session/service ratings (delegates have sessions, exhibitors have services)
   const sessionRatings = useMemo(() => {
     const allSessionRatings: Record<string, number[]> = {};
 
     responses.forEach(r => {
-      const sessions = r.responses.sessions_rating;
-      if (sessions && typeof sessions === 'object') {
-        Object.entries(sessions).forEach(([session, rating]) => {
+      // Check for delegate sessions_rating or exhibitor services_rating
+      const ratings = r.responses.sessions_rating || r.responses.services_rating;
+      if (ratings && typeof ratings === 'object') {
+        Object.entries(ratings).forEach(([item, rating]) => {
           if (typeof rating === 'number') {
-            if (!allSessionRatings[session]) {
-              allSessionRatings[session] = [];
+            if (!allSessionRatings[item]) {
+              allSessionRatings[item] = [];
             }
-            allSessionRatings[session].push(rating);
+            allSessionRatings[item].push(rating);
           }
         });
       }
     });
 
-    return Object.entries(allSessionRatings).map(([session, ratings]) => ({
-      session,
+    return Object.entries(allSessionRatings).map(([item, ratings]) => ({
+      session: item,
       average: (ratings.reduce((sum, r) => sum + r, 0) / ratings.length).toFixed(2),
       count: ratings.length
     })).sort((a, b) => parseFloat(b.average) - parseFloat(a.average));
@@ -82,14 +83,27 @@ export default function ResponseAnalytics({ responses, filter, isSingleView = fa
 
   // Extract text responses for word frequency
   const textAnalytics = useMemo(() => {
-    const textQuestions = [
-      { id: 'what_worked', label: 'What Worked Well' },
-      { id: 'waste_of_time', label: 'What Felt Like a Waste' },
+    // Different questions for delegates vs exhibitors
+    const delegateTextQuestions = [
+      { id: 'what_worked', label: 'Most Valuable Aspects' },
+      { id: 'waste_of_time', label: 'Could Be Improved/Eliminated' },
       { id: 'what_was_missing', label: 'What Was Missing' },
-      { id: 'stop_doing', label: 'What to Stop Doing' },
-      { id: 'one_thing_change', label: 'What to Do for 2027' },
-      { id: 'honest_feedback', label: 'Honest Feedback' },
+      { id: 'sessions_feedback', label: 'Session Feedback' },
+      { id: 'one_thing_change', label: 'Changes for 2027' },
+      { id: 'honest_feedback', label: 'Additional Feedback' },
     ];
+
+    const exhibitorTextQuestions = [
+      { id: 'services_feedback', label: 'Service Feedback' },
+      { id: 'one_thing_change', label: 'Changes for 2027' },
+      { id: 'honest_feedback', label: 'Additional Feedback' },
+    ];
+
+    // Use appropriate questions based on filter
+    const textQuestions = filter === 'exhibitor' ? exhibitorTextQuestions :
+                          filter === 'delegate' ? delegateTextQuestions :
+                          // For 'all', combine both
+                          [...delegateTextQuestions, ...exhibitorTextQuestions];
 
     return textQuestions.map(q => {
       const texts = responses
@@ -158,10 +172,12 @@ export default function ResponseAnalytics({ responses, filter, isSingleView = fa
         </div>
       </div>
 
-      {/* Session Ratings */}
+      {/* Session/Service Ratings */}
       {sessionRatings.length > 0 && (
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Session Ratings</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            {filter === 'exhibitor' ? 'Service Ratings' : 'Session Ratings'}
+          </h2>
           <div className="bg-white rounded-lg shadow p-6">
             <ResponsiveContainer width="100%" height={400}>
               <BarChart data={sessionRatings} layout="vertical">
